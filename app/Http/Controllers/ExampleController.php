@@ -1,32 +1,38 @@
 <?php
 
-interface Response
+class ClaseA
 {
-    public function JsonResponse(): string;
-    public function HtmlResponse(): string;
-    
-}
-
-interface BinaryResponse
-{
-    public function BinaryResponse();
-}
-
-final class apiResponse implements Response
-{
-    public function JsonResponse(): string
+    public function getInformationItems()
     {
-        return json_encode("hello world",true);
-    }
-    public function HtmlResponse(): string
-    {
-        return '<b>Hello world</b>';
+        return ["itmes"];
     }
 }
-final class fileResponse implements BinaryResponse
+
+class ClaseC
 {
-    public function BinaryResponse()
+    public function getInformationOfClasseC()
     {
-        return true;
+        return ["c"];
+    }
+}
+
+class ClaseB
+{
+    private $claseA;
+    private $claseC;
+
+    public function __construct(ClaseA $claseA,ClaseC $claseC)
+    {
+        $this->claseA=$claseA;
+        $this->claseC=$claseC;
+    }
+
+    public function getInformationOfClaseA(): array
+    {
+        return $this->claseA->getInformationItems();
+    }
+    public function getInformationOfClaseC(): array
+    {
+        return $this->claseC->getInformationOfClasseC();
     }
 }
