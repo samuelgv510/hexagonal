@@ -1,24 +1,31 @@
 <?php
 
-abstract class ParentClass
-{   
-    abstract function getSayHello(string $person): array;
+interface Response
+{
+    public function JsonResponse(): string;
+    public function HtmlResponse(): string;
+    
 }
 
-interface ParentInterface
+interface BinaryResponse
 {
-    public function getSayBye(string $person): bool;
+    public function BinaryResponse();
 }
 
-final class ChildClass extends ParentClass implements ParentInterface
+final class apiResponse implements Response
 {
-    public function getSayHello(string $person): array
+    public function JsonResponse(): string
     {
-        return [
-            'saludo'=>'hello world '.$person
-        ];
+        return json_encode("hello world",true);
     }
-    public function getSayBye(string $person): bool
+    public function HtmlResponse(): string
+    {
+        return '<b>Hello world</b>';
+    }
+}
+final class fileResponse implements BinaryResponse
+{
+    public function BinaryResponse()
     {
         return true;
     }
