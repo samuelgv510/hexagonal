@@ -1,35 +1,56 @@
 <?php
+interface Users
+{
+    public function sayHello();
+}
 
-use App\Models\User;
+class NaturalUser implements Users
+{
+    public function sayHello()
+    {
+        return 'Hello world from natural user';
+    }
+}
+class BussinesUser implements Users
+{
+    public function sayHello()
+    {
+        return 'Hello world from bussines user';
+    }
+}
+class AdminUser implements Users
+{
+    public function sayHello()
+    {
+        return 'Hello world from admin user';
+    }
+}
 
-class UserStoreController
+class UsersImplementation
 {
-    public function store($password)
+    public function identifyUser(Users $users)
     {
-       (new UserValidateAuth())->validateUser();
-        $user=new User;
-        $user->password=(new UsersPasswordHelper())->generatePasswordHard($password);
-        $user->save();       
-    }
-   
-}
-class UserValidateAuth
-{
-    public function validateUser()
-    {
-        if(!Auth::id()==123456789){
-            throw exception("Exception en auth");
-        }
+        $users->sayHello();
     }
 }
-class UsersPasswordHelper
-{
-    public function generatePassword($password)
-    {
-        return password_hash($password,PASSWORD_DEFAULT);
-    }
-    public function generatePasswordHard($password)
-    {
-        return password_hash($password,PASSWORD_BCRYPT);
-    }
-}
+// class Users
+// {
+//     public function identifyUser($user)
+//     {
+//         switch($user){
+//             case 'natural':
+//                 $this->sayHello('natural user');
+//                 break;
+//             case 'bussiness':
+//                 $this->sayHello('bussiness user');
+//                 break;
+//             case 'admin':
+//                 $this->sayHello('admin user');
+//                 break;
+//         }
+//     }
+//     public function sayHello($user)
+//     {
+//         return 'Hello world from '.$user;
+//     }
+// }
