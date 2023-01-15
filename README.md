@@ -77,4 +77,5 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
     <li>php artisan make:seeder Task</li>
     <li>php artisan db:seed</li>
     <li>php artisan config:cache</li>
+    <li>composer dump-autoload</li>
 </ul>
