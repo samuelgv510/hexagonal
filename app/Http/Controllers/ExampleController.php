@@ -1,56 +1,25 @@
 <?php
-interface Users
-{
-    public function sayHello();
+
+abstract class ParentClass
+{   
+    abstract function getSayHello(string $person): array;
 }
 
-class NaturalUser implements Users
+interface ParentInterface
 {
-    public function sayHello()
-    {
-        return 'Hello world from natural user';
-    }
-}
-class BussinesUser implements Users
-{
-    public function sayHello()
-    {
-        return 'Hello world from bussines user';
-    }
-}
-class AdminUser implements Users
-{
-    public function sayHello()
-    {
-        return 'Hello world from admin user';
-    }
+    public function getSayBye(string $person): bool;
 }
 
-class UsersImplementation
+final class ChildClass extends ParentClass implements ParentInterface
 {
-    public function identifyUser(Users $users)
+    public function getSayHello(string $person): array
     {
-        $users->sayHello();
+        return [
+            'saludo'=>'hello world '.$person
+        ];
+    }
+    public function getSayBye(string $person): bool
+    {
+        return true;
     }
 }
-// class Users
-// {
-//     public function identifyUser($user)
-//     {
-//         switch($user){
-//             case 'natural':
-//                 $this->sayHello('natural user');
-//                 break;
-//             case 'bussiness':
-//                 $this->sayHello('bussiness user');
-//                 break;
-//             case 'admin':
-//                 $this->sayHello('admin user');
-//                 break;
-//         }
-//     }
-//     public function sayHello($user)
-//     {
-//         return 'Hello world from '.$user;
-//     }
-// }
